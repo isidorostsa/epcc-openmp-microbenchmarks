@@ -1,0 +1,11 @@
+
+CC=clang++
+
+HPX_INSTALL = /home/mustang/CLionProjects/hpxmp_meta/dependencies/hpx/cmake-install/RelWithDebInfo
+LLVM_INSTALL = /home/mustang/CLionProjects/hpxmp_meta/dependencies/llvm-project/openmp/cmake-install-hpxmp/RelWithDebInfo
+HPX_DEPS = -I/home/mustang/Desktop/hpx/hwloc/hwloc_install/include -I/home/mustang/Desktop/hpx/boost/boost_install/include -I/home/mustang/Desktop/hpx/asio/asio-1.24.0/include
+
+CFLAGS = -std=c++17 -fopenmp -g -O3 $(HPX_DEPS) -I$(HPX_INSTALL)/include -I$(LLVM_INSTALL)/include -DHPX_BENCHMARK
+LDFLAGS = -std=c++17 -g -L$(HPX_INSTALL)/lib  -Wl,-rpath=$(HPX_INSTALL)/lib
+CPPFLAGS = -E
+LIBS = -l:libhpx_init.a -lhpx  -lhpx_core -lomp -lc++ -lm

@@ -1,7 +1,7 @@
-include Makefile.defs
+include Makefile.defs.hpx
 
 .c.o:
-	${CC} ${CFLAGS} -c $*.c
+	$(CC) -c $(CFLAGS) $*.c
 
 SYNCOBJS =  syncbench.o common.o
 SCHEDOBJS = schedbench.o common.o
@@ -25,7 +25,7 @@ prog: arraybench_$(IDA)
 
 # Multiple header files due to multiple array sizes, makes header file arraybench_*.h
 arraybench_$(IDA).h: arraybench.h
-	$(CC) -DIDA=$(IDA) $(CPPFLAGS) arraybench.h -o $@
+	$(CC) -DIDA=$(IDA) $(CFLAGS) $(CPPFLAGS) arraybench.h -o $@
 
 # Multiple object files due to multiple array sizes, makes object file arraybench_*.o
 arraybench_$(IDA).o: arraybench_$(IDA).h arraybench.c
@@ -36,13 +36,13 @@ arraybench_$(IDA): $(ARRAYOBJS) arraybench.c
 	$(CC) $(LDFLAGS) $(ARRAYOBJS) $(LIBS) -o $@
 
 syncbench: $(SYNCOBJS)
-	$(CC) -o $@ $(LDFLAGS) $(SYNCOBJS) $(LIBS) 
+	$(CC) $(SYNCOBJS) $(LDFLAGS) $(LIBS) -o $@
 
 schedbench: $(SCHEDOBJS)
-	$(CC) -o $@ $(LDFLAGS) $(SCHEDOBJS) $(LIBS) 
+	$(CC) -o $@  $(LDFLAGS) $(SCHEDOBJS) $(LIBS)
 
 taskbench: $(TASKOBJS)
-	$(CC) -o $@ $(LDFLAGS) $(TASKOBJS) $(LIBS) 
+	$(CC) -o $@ $(LDFLAGS) $(TASKOBJS) $(LIBS)
 
 clean:
 	-rm  syncbench schedbench taskbench arraybench_* syncbench.o schedbench.o taskbench.o common.o 
