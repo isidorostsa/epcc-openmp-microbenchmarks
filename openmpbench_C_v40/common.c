@@ -57,7 +57,6 @@ double targettesttime = 0.0; // The length of time in microseconds that the test
                              // should run for.
 unsigned long innerreps; // Inner repetitions
 double *times;           // Array of doubles storing the benchmark times in microseconds
-char type[120]="ALL";
 double referencetime;    // The average reference time in microseconds to perform
 			 // outerreps runs
 double referencesd;      // The standard deviation in the reference time in
@@ -84,7 +83,7 @@ void usage(char *argv[]) {
 	   DEFAULT_OUTER_REPS, DEFAULT_TEST_TARGET_TIME, DEFAULT_DELAY_TIME);
 }
 
-void parse_args(int argc, char *argv[]) {
+void parse_args(int argc, char *argv[], char* type) {
     // Parse the parameters
     int arg;
     for (arg = 1; arg < argc; arg++) {
@@ -310,7 +309,7 @@ void printreferencefooter(char *name, double referencetime, double referencesd, 
 	   name, referencemed);
 }
 
-void init(int argc, char **argv)
+void init(int argc, char **argv, char* type)
 {
 #pragma omp parallel
     {
@@ -321,7 +320,7 @@ void init(int argc, char **argv)
 
     }
 
-    parse_args(argc, argv);
+    parse_args(argc, argv, type);
 
     if (outerreps == -1) {
 	outerreps = DEFAULT_OUTER_REPS;

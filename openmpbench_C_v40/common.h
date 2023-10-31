@@ -48,7 +48,7 @@ extern double targettesttime;     // The length of time in microseconds the test
 extern double *times;             // Array to store results in
 
 
-void init(int argc, char **argv);
+void init(int argc, char **argv, char* type);
 
 void initreference(char *name);
 

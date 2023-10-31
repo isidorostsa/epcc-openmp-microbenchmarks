@@ -46,12 +46,13 @@ double atest[IDA];
 
 #pragma omp threadprivate (btest)
 
+char type[120] = "ALL";
+
 int main(int argc, char **argv) {
 
-    init(argc, argv);
+    init(argc, argv, type);
 
     char testName[32];
-    extern char type[120];
 
     /* GENERATE REFERENCE TIME */
     reference("reference time 1", &refer);

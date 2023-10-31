@@ -42,10 +42,10 @@
 #ifdef HPX_BENCHMARK
 #include <hpx/hpx_main.hpp>
 #endif
+char type[120] = "ALL";
 
 int main(int argc, char **argv) {
-  extern char type[120];
-  init(argc, argv);
+  init(argc, argv, type);
 
 
     /* GENERATE REFERENCE TIME */

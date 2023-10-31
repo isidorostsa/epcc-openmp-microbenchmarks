@@ -30,10 +30,6 @@
 *                                                                           *
 ****************************************************************************/
 
-#ifdef HPX_BENCHMARK
-#include <hpx/hpx_main.hpp>
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,14 +39,18 @@
 #include "common.h"
 #include "syncbench.h"
 
+#ifdef HPX_BENCHMARK
+#include <hpx/hpx_main.hpp>
+#endif
+
 omp_lock_t lock1;
 omp_lock_t lock2;
 omp_lock_t lock3;
 
-int main(int argc, char **argv) {
-    extern char type[120];
+char type[120]="ALL";
 
-    init(argc, argv);
+int main(int argc, char **argv) {
+    init(argc, argv, type);
 
     omp_init_lock(&lock1);
     omp_init_lock_with_hint(&lock2, omp_lock_hint_contended);

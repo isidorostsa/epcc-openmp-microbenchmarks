@@ -46,10 +46,11 @@
 
 int cksz, itersperthr = 1024;
 char testName[32];
-extern char type[120];
+char type[120];
+
 int main(int argc, char **argv) {
 
-    init(argc, argv);
+    init(argc, argv, type);
     // Also print itersperthr
     printf("\t%d iterations per thread\n", itersperthr);
 
